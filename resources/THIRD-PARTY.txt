@@ -1,0 +1,9 @@
+Noto Sans CJK SC Regular
+Source: https://github.com/notofonts/noto-cjk/blob/main/Sans/OTF/SimplifiedChinese/NotoSansCJKsc-Regular.otf
+Copyright 2014-2021 Adobe (http://www.adobe.com/), with Reserved Font Name 'Source'.
+Licensed under SIL Open Font License 1.1; see OFL.txt.
+Bundled filename: NotoSansSC-Regular.otf (OpenType CJK SC font).
+
+PDF.js CMaps, standard fonts and WASM files are copied from pdfjs-dist during build.
+Their included LICENSE files accompany the copied assets.
+Electron and npm dependencies retain their license notices in their distribution/package files.

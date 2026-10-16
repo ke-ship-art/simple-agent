@@ -1,0 +1,18 @@
+node_modules/
+out/
+release/
+test-results*/
+playwright-report/
+.test-data/
+*.log
+src/renderer/public/pdfjs/
+
+# Local credentials and runtime data must never enter source control.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+/credentials*.enc
+/state*.json
+/backups/
