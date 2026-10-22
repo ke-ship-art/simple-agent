@@ -120,3 +120,7 @@ Remove-Item Env:SIMPLE_AGENT_PACKAGED_EXE
 0.2.0 的整改明细、兼容性与验证入口见 [整改报告](docs/RELIABILITY-AUDIT.md)。升级会自动迁移旧历史中的图片；升级后不要用旧版本写入同一份用户数据。
 
 0.2.1 的前后端体验修复与验证范围见 [体验审查报告](docs/EXPERIENCE-AUDIT.md)。聊天草稿按会话保存到本机；Ctrl+S 保存文件；连接测试支持取消；Excel 复制粘贴保留单元格内换行及引号。
+
+## 许可证
+
+本项目采用 [MIT License](LICENSE)。内置字体和第三方依赖继续适用各自的许可证。

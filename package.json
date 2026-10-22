@@ -2,6 +2,7 @@
   "name": "simple-agent",
   "version": "0.2.1",
   "private": true,
+  "license": "MIT",
   "description": "中文本地文件智能体",
   "type": "module",
   "main": "out/main/index.js",
