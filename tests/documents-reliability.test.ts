@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, expect, it } from 'vitest';
 import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { tmpdir, homedir } from 'node:os';
+import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { zipSync, strFromU8, strToU8 } from 'fflate';
 import { PDFDocument } from 'pdf-lib';
@@ -40,7 +40,7 @@ it('keeps unsupported Unicode as a native PDF note but refuses unsupported font 
 it('openpyxl data_only sees valid independent caches and no stale dependent results',async()=>{
  const doc=await workbook();await docs.apply(id,doc.path,doc.version,[{type:'cell',sheetId:'rId1',ref:'A1',value:'4'}],files.newChangeSet(id,'s'));
  if(process.env.SIMPLE_AGENT_INTEROP_OUTPUT)await writeFile(process.env.SIMPLE_AGENT_INTEROP_OUTPUT,await files.bytes(id,doc.path));
- const python=process.env.SIMPLE_AGENT_PYTHON??(process.platform==='win32'?join(homedir(),'.cache','codex-runtimes','codex-primary-runtime','dependencies','python','python.exe'):'python3');
+ const python=process.env.SIMPLE_AGENT_PYTHON??(process.platform==='win32'?'python':'python3');
  const code=`import openpyxl,sys,json\np=sys.argv[1]\nv=openpyxl.load_workbook(p,data_only=True)\nf=openpyxl.load_workbook(p,data_only=False)\nassert v['Sheet1']['B1'].value is None\nassert v['Sheet1']['D1'].value == 101\nassert v['第二表']['A1'].value is None\nassert v['第二表']['B1'].value == 100\nassert f['第二表']['A1'].value == '=Sheet1!C1*2'\nassert f.calculation.fullCalcOnLoad\nprint('cache interoperability OK')`;
- const result=spawnSync(python,['-c',code,join(root,'work','book.xlsx')],{encoding:'utf8',timeout:15000});expect(result.stderr).not.toContain('Traceback');expect(result.status,result.stderr).toBe(0);expect(result.stdout).toContain('interoperability OK');
+ const result=spawnSync(python,['-c',code,join(root,'work','book.xlsx')],{encoding:'utf8',timeout:15000});expect(result.error,`无法启动 Python：${python}；请设置 SIMPLE_AGENT_PYTHON 并安装 requirements-dev.txt`).toBeUndefined();expect(result.status,result.stderr).toBe(0);expect(result.stdout).toContain('interoperability OK');
 });

@@ -52,7 +52,7 @@ describe('workspace file transactions', () => {
   });
   it('does not overwrite existing files when creating', async () => { const set = files.newChangeSet(workspaceId, 'manual'); await docs.create(workspaceId, 'a.txt', 'first', set); await expect(docs.create(workspaceId, 'a.txt', 'second', set)).rejects.toThrow('版本'); expect(await readFile(join(root, '中文 工作区', 'a.txt'), 'utf8')).toBe('first'); });
   it('retains the original and backup when atomic replacement fails', async () => {
-    faults.path = join(root, '中文 工作区', 'locked.txt'); await writeFile(faults.path, 'original'); const doc = await docs.inspect(workspaceId, 'locked.txt'); const set = files.newChangeSet(workspaceId, 'manual');
+    faults.path = await files.path(workspaceId, 'locked.txt'); await writeFile(faults.path, 'original'); const doc = await docs.inspect(workspaceId, 'locked.txt'); const set = files.newChangeSet(workspaceId, 'manual');
     await expect(docs.apply(workspaceId, doc.path, doc.version, [{ type: 'set_text', text: 'new' }], set)).rejects.toThrow('文件保存失败'); expect(await readFile(faults.path, 'utf8')).toBe('original'); expect(set.changes[0].status).toBe('restored'); expect(await readFile(join(store.directory, 'backups', set.id, set.changes[0].before!), 'utf8')).toBe('original');
   });
   it('normalizes Windows case and slash aliases for unsaved editor conflicts', async () => {

@@ -109,7 +109,7 @@ Remove-Item Env:SIMPLE_AGENT_PACKAGED_EXE
 
 渲染进程开启沙箱和上下文隔离，不提供 Node、任意文件访问或命令执行。模型调用和文件操作都在主进程，事件携带会话 ID 与任务 ID。
 
-开发互操作测试需要 Python 3 和 openpyxl；可用 `SIMPLE_AGENT_PYTHON` 指定解释器。运行包本身不需要 Python 或 Office。
+开发互操作测试需要 Python 3 和 openpyxl，执行 `python -m pip install -r requirements-dev.txt` 安装测试依赖；可用 `SIMPLE_AGENT_PYTHON` 指定解释器。运行包本身不需要 Python 或 Office。
 
 ## 验证状态
 
