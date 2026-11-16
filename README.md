@@ -124,3 +124,8 @@ Remove-Item Env:SIMPLE_AGENT_PACKAGED_EXE
 ## 许可证
 
 本项目采用 [MIT License](LICENSE)。内置字体和第三方依赖继续适用各自的许可证。
+
+
+## 本轮修复
+
+详见 [FIXES.md](FIXES.md)，包含数据保护、运行边界及验证说明。

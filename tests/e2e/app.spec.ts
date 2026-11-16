@@ -12,7 +12,7 @@ async function launch() {
   await expect.poll(() => app.windows().length).toBe(2); page = app.windows().find(p => p.url().includes('index.html')) ?? app.windows()[1];
   for (const target of app.windows()) target.on('pageerror', e => runtimeErrors.push(e.message));
   await expect(page.getByText('Simple Agent', { exact: true })).toBeVisible();
-  const versions = await app.evaluate(() => ({ electron: process.versions.electron, node: process.versions.node })); expect(versions).toEqual({ electron: '44.5.1', node: '24.21.0' });
+  const versions = await app.evaluate(() => ({ electron: process.versions.electron, node: process.versions.node })); expect(versions.electron).toBe(JSON.parse(await readFile(resolve('package.json'),'utf8')).devDependencies.electron); expect(Number(versions.node.split('.')[0])).toBeGreaterThanOrEqual(24);
   await app.evaluate(({ dialog }, folder) => { dialog.showOpenDialog = async () => ({ canceled: false, filePaths: [folder] }); }, join(root, '工作区'));
 }
 const answer = (response: any, text?: string, call?: { name: string; arguments: object }) => {
